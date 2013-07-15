@@ -9,13 +9,6 @@ const (
 	MAX_COL = 4
 )
 
-// 0,0  0,1  0,2
-// 1,0  1,1  1,2
-// 2,0  2,1  2,2
-// ROW, COL
-//LED[ROW][COL]
-var GRID [][]LED
-
 //GOOD IDEA: run the visualizer algorithm in separate thread, write to data structure, then the refresh algorithm can just get a read lock on the same datastructure. mutexes.
 
 func main() {
@@ -25,16 +18,9 @@ func main() {
 	//Using a package, startup the USB communication
 	fmt.Println("Initialize Serial Communications")
 
-	fmt.Println("Write and refresh loop")
-
-	//Sanity check
-	for a, row := range GRID {
-		fmt.Print("Row", a)
-		for _, light := range row {
-			fmt.Print(light, "  ")
-		}
-		fmt.Println()
-	}
+	fmt.Println("Visualize and refresh loop")
+	go Visualizer() //updates GRID based on algorithm
+	go Refresh()    //reads GRID and sends over USB
 }
 
 func setup() {
@@ -49,5 +35,14 @@ func setup() {
 		}
 		i++
 		GRID = append(GRID, tempROW)
+	}
+
+	//Sanity check
+	for a, row := range GRID {
+		fmt.Print("Row", a)
+		for _, light := range row {
+			fmt.Print(light, "  ")
+		}
+		fmt.Println()
 	}
 }

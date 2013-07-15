@@ -7,6 +7,15 @@ type LED struct {
 	blue  int //0 to 256
 }
 
-func SetLED(led LED, newR, newG, newB int) {
+// 0,0  0,1  0,2
+// 1,0  1,1  1,2
+// 2,0  2,1  2,2
+// ROW, COL
+//LED[ROW][COL]
+var GRID [][]LED
 
+func Refresh() {
+	//iterate through the data structure
+	//get a "lock" on a single LED
+	//refresh it
 }
