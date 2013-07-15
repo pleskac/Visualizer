@@ -16,6 +16,8 @@ const (
 //LED[ROW][COL]
 var GRID [][]LED
 
+//GOOD IDEA: run the visualizer algorithm in separate thread, write to data structure, then the refresh algorithm can just get a read lock on the same datastructure. mutexes.
+
 func main() {
 	//setup the data structures
 	setup()
@@ -24,6 +26,8 @@ func main() {
 	fmt.Println("Initialize Serial Communications")
 
 	fmt.Println("Write and refresh loop")
+
+	//Sanity check
 	for a, row := range GRID {
 		fmt.Print("Row", a)
 		for _, light := range row {
