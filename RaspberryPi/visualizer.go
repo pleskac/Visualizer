@@ -7,24 +7,6 @@ import (
 	"time"
 )
 
-func Visualizer(c chan LED) {
-	for {
-		i := 0
-		for i < MAX_ROW {
-			j := 0
-			for j < MAX_COL {
-				//Add a white LED at that locations
-				temp := LED{i, j, 256, 256, 256}
-				temp.Print()
-				//send light to be updated immediately
-				c <- temp
-				j++
-			}
-			i++
-		}
-	}
-}
-
 //Refresh rate is in seconds
 func RandomVisualizer(c chan LED, refreshRate int64) {
 	d := 60 * refreshRate * 1e7
