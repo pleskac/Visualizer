@@ -1,28 +1,24 @@
 package main
 
 import (
-	"fmt"
+	_ "fmt"
 )
 
-func Visualizer() {
-	fmt.Println("Inside the visualizer")
-	//Infinite loop to keep updating!
+func Visualizer(c chan LED) {
 	for {
-		fmt.Println(GRID_READY)
-		if GRID_READY {
-			for _, row := range GRID {
-				for _, light := range row {
-					r, g, b := random()
-					//GET THE MUTEX
-					light.red = r
-					light.green = g
-					light.blue = b
-					//RELEASE THE MUTEX
-				}
+		i := 0
+		for i < MAX_ROW {
+			j := 0
+			for j < MAX_COL {
+				//Add a white LED at that locations
+				temp := LED{i, j, 256, 256, 256}
+				temp.Print()
+				//send light to be updated immediately
+				c <- temp
+				j++
 			}
-			PrintGrid()
+			i++
 		}
-		PrintGrid()
 	}
 }
 

@@ -10,27 +10,20 @@ const (
 )
 
 //The data needed to represent a single RGB LED
+//Row and col saved in the struct so we can push these on a channel without worrying about order
 type LED struct {
+	row   int
+	col   int
 	red   int //0 to 256
 	green int //0 to 256
 	blue  int //0 to 256
+
 }
 
-// 0,0  0,1  0,2
-// 1,0  1,1  1,2
-// 2,0  2,1  2,2
-// ROW, COL
-//LED[ROW][COL]
-//NEED A MUTEX/LOCK ON EACH ELEMENT
-var GRID [][]LED
-var GRID_READY = false
+func (light LED) String() string {
+	return fmt.Sprintf("LED (%d,%d) RGB: %d/%d/%d", light.row, light.col, light.red, light.green, light.blue)
+}
 
-func PrintGrid() {
-	for a, row := range GRID {
-		fmt.Print("Row", a)
-		for _, light := range row {
-			fmt.Print(light, "  ")
-		}
-		fmt.Println()
-	}
+func (light LED) Print() {
+	fmt.Printf("LED (%d,%d) RGB: %d/%d/%d\n", light.row, light.col, light.red, light.green, light.blue)
 }

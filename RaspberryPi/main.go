@@ -1,41 +1,22 @@
 package main
 
 import (
-	"fmt"
+	_ "fmt"
 )
 
 //GOOD IDEA: run the visualizer algorithm in separate thread, write to data structure, then the refresh algorithm can just get a read lock on the same datastructure. mutexes.
 
 func main() {
-	//setup the data structures
-	setup()
 
-	go Visualizer() //updates GRID based on algorithm
+	lightsToUpdate := make(chan LED)
 
-	//Using a package, startup the USB communication
-	fmt.Println("Initialize Serial Communications")
-}
+	//add things to channel continuously
+	go Visualizer(lightsToUpdate)
 
-func setup() {
-	i := 0
-	for i < MAX_ROW {
-		j := 0
-		var tempROW []LED
-		for j < MAX_COL {
-			//Add a black LED at that locations
-			tempROW = append(tempROW, LED{0, 0, 0})
-			j++
-		}
-		i++
-		GRID = append(GRID, tempROW)
+	//take things off channel
+	//must send things over USB serially, this will ensure taking things off the channel one at a time, waiting to complete, then continuing
+	for {
+		UpdateLight(<-lightsToUpdate)
 	}
 
-	fmt.Println("GRID", GRID)
-	fmt.Println("GRID should be set up")
-	fmt.Println("GRID rows", len(GRID))
-
-	//Sanity check
-	PrintGrid()
-
-	GRID_READY = true
 }
