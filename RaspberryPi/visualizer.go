@@ -9,7 +9,7 @@ import (
 
 //Refresh rate is in seconds
 func RandomVisualizer(c chan LED, refreshRate int64) {
-	d := 60 * refreshRate * 1e7
+	d := refreshRate * 60e7
 	test := 0
 	for {
 		i := 0
