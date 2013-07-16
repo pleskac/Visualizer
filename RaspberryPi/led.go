@@ -23,18 +23,14 @@ type LED struct {
 //LED[ROW][COL]
 //NEED A MUTEX/LOCK ON EACH ELEMENT
 var GRID [][]LED
+var GRID_READY = false
 
-func Refresh() {
-	//iterate through the data structure
-	//get a "lock" on a single LED
-	//refresh it
-	//needs to be an infinite loop
-	for {
-		for r, row := range GRID {
-			for c, col := range row {
-				fmt.Println("Updating cell", r, c)
-				fmt.Println(col)
-			}
+func PrintGrid() {
+	for a, row := range GRID {
+		fmt.Print("Row", a)
+		for _, light := range row {
+			fmt.Print(light, "  ")
 		}
+		fmt.Println()
 	}
 }

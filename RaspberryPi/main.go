@@ -10,12 +10,10 @@ func main() {
 	//setup the data structures
 	setup()
 
+	go Visualizer() //updates GRID based on algorithm
+
 	//Using a package, startup the USB communication
 	fmt.Println("Initialize Serial Communications")
-
-	fmt.Println("Visualize and refresh loop")
-	go Visualizer() //updates GRID based on algorithm
-	go Refresh()    //reads GRID and sends over USB
 }
 
 func setup() {
@@ -32,12 +30,12 @@ func setup() {
 		GRID = append(GRID, tempROW)
 	}
 
+	fmt.Println("GRID", GRID)
+	fmt.Println("GRID should be set up")
+	fmt.Println("GRID rows", len(GRID))
+
 	//Sanity check
-	for a, row := range GRID {
-		fmt.Print("Row", a)
-		for _, light := range row {
-			fmt.Print(light, "  ")
-		}
-		fmt.Println()
-	}
+	PrintGrid()
+
+	GRID_READY = true
 }
