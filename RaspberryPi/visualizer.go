@@ -43,3 +43,4 @@ func randomLEDValue() int {
 }
 
 //Add different visualization patterns
+//visualizer based on color and brightness
