@@ -1,7 +1,10 @@
 package main
 
+//RIGHT NOW SERIAL PACKAGE ONLY WORKS FOR MAC OS X (I think)
 import (
 	"fmt"
+    _ "github.com/pleskac/go-serial/serial"
+
 )
 
 //can use the GPIO pins on the RaspberryPi to directly control LEDs, BUT...
@@ -12,3 +15,4 @@ import (
 func UpdateLight(light LED) {
 	fmt.Println("Updating LED", light.String())
 }
+
