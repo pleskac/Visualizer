@@ -7,6 +7,8 @@ import (
 //GOOD IDEA: run the visualizer algorithm in separate thread, write to data structure, then the refresh algorithm can just get a read lock on the same datastructure. mutexes.
 
 func main() {
+	//Sanity test
+	//Test()
 
 	lightsToUpdate := make(chan LED)
 
