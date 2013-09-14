@@ -17,7 +17,7 @@ func RandomVisualizer(c chan LED, refreshRate int64) {
 			j := 0
 			for j < MAX_COL {
 				//Add a white LED at that locations
-				temp := LED{i, j, randomLEDValue(), randomLEDValue(), randomLEDValue()}
+				temp := LED{int32(i), int32(j), int32(randomLEDValue()), int32(randomLEDValue()), int32(randomLEDValue())}
 				temp.Print()
 				//send light to be updated immediately
 				c <- temp

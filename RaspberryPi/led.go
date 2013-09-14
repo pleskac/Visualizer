@@ -12,11 +12,11 @@ const (
 //The data needed to represent a single RGB LED
 //Row and col saved in the struct so we can push these on a channel without worrying about order
 type LED struct {
-	row   int
-	col   int
-	red   int //0 to 256
-	green int //0 to 256
-	blue  int //0 to 256
+	row   int32
+	col   int32
+	red   int32 //0 to 256
+	green int32 //0 to 256
+	blue  int32 //0 to 256
 
 }
 

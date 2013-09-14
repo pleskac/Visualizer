@@ -29,7 +29,7 @@ func UpdateLight(light LED) {
 	
 	//Serialize the lights into bytes so we can transfer them
 	buf := new(bytes.Buffer)
-	err := binary.Write(buf, binary.LittleEndian, light.red)
+	err := binary.Write(buf, binary.LittleEndian, &light)
 	if err != nil {
 		fmt.Println("binary.Write failed:", err)
 	}
